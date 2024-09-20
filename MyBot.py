@@ -1,5 +1,9 @@
 import telebot
 
+TOKEN = "7086862785:AAHCB_BDJ3Ffly4gpcOVDFuWFX1LeBzf0rk"
+
+WEBHOOK_URL = 'https://telbot-7kzz.onrender.com' + TOKEN
+
 bot = telebot.TeleBot("7086862785:AAHCB_BDJ3Ffly4gpcOVDFuWFX1LeBzf0rk")
 
 
@@ -40,4 +44,12 @@ def end(message , user_data):
     else:
         bot.send_message(message.chat.id , "خوشبختانه شما ابله نیستید")
 
-bot.infinity_polling()
+def setup_webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url=WEBHOOK_URL)
+
+if __name__ == "__main__":
+    setup_webhook()
+    
+    # دریافت درخواست‌های Webhook از تلگرام
+    bot.polling(none_stop=True)
